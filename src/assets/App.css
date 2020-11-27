@@ -1,0 +1,25 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100%;
+}
+
+/*background: linear-gradient( 90deg, rgba(231, 8, 112, 1) 0%,  rgba(255, 15, 15, 1) 100% );*/
+
+a {
+  text-decoration: none;
+}
+
+#root {
+  height: 100%;
+}
