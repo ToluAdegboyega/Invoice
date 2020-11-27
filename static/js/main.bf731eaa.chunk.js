@@ -1,0 +1,2 @@
+(this.webpackJsonpinvoice=this.webpackJsonpinvoice||[]).push([[0],{10:function(n,e,t){},11:function(n,e,t){"use strict";t.r(e);var c=t(1),i=t(0),r=t.n(i),s=t(3),o=t.n(s);t(9),t(10);var a=function(){return Object(c.jsx)("div",{className:"",children:"In Progress."})};o.a.render(Object(c.jsx)(r.a.StrictMode,{children:Object(c.jsx)(a,{})}),document.getElementById("root"))},9:function(n,e,t){}},[[11,1,2]]]);
+//# sourceMappingURL=main.bf731eaa.chunk.js.map
