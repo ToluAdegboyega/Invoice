@@ -1,12 +1,24 @@
 import React from 'react';
-import './assets/App.css';
+import InvoiceTable from './components/InvoiceTable'
+import AddInvoice from './components/AddInvoice';
+import { Route, BrowserRouter as Router} from 'react-router-dom';
+import Login from './components/Login';
+import SignUp from './components/SignUp';
+import  './assets/App.css';
+import  PrivateRoute  from  './PrivateRoute';
+import  {AuthProvider}  from  './Authentication';
 
-function App() {
-  return (
-    <div className="">
-     In Progress.
-    </div>
+const App = (props) => (
+    <AuthProvider>
+      <Router>
+        <PrivateRoute path='/Invoice' exact component={(props)=> <InvoiceTable  {...props} />} />
+        <PrivateRoute path='/add-invoice' exact component={(props)=> <AddInvoice  {...props} />}  />
+        <PrivateRoute path='/edit-invoice/:id' exact component={(props)=> <AddInvoice editMode={true} {...props} />}  />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={SignUp} />
+      </Router>
+    </AuthProvider>
   );
-}
-
+  
 export default App;
+
