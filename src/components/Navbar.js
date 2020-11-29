@@ -57,7 +57,7 @@ const styles = {
 
 const LinkData = [{
     text:'Invoice Listing',
-    to:'/Invoice ',
+    to:'/Invoice',
 },{
     text:'Add Invoice',
     to:'/add-invoice',
@@ -77,7 +77,7 @@ const AllLinks = ({classes})=>{
 const Navbar = ({classes})=> {
     return (
         <div className={classes.root}>
-            <AppBar position="relative" color="secondary" >
+            <AppBar position="relative" color="primary" >
                 <Toolbar  >
                     <AllLinks classes={classes} />
                     <Button onClick={() => config.auth().signOut()} className={classes.button}>Logout</Button>
