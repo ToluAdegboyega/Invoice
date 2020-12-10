@@ -1,1 +1,2 @@
-React + Firebase invoice generator. (In Progress)
+React + Firebase invoice generator. 
+(In Progress)
