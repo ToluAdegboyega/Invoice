@@ -8,35 +8,35 @@ import TableCell from "@material-ui/core/TableCell";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Paper from "@material-ui/core/Paper";
 import { AutoSizer, Column, SortDirection, Table } from "react-virtualized";
-import { readCollection } from './utils'
-import InfoDialog from './InfoDialog';
-import Navbar from './Navbar';
+import { readCollection } from "./utils";
+import InfoDialog from "./InfoDialog";
+import Navbar from "./Navbar";
 
-const styles = theme => ({
+const styles = (theme) => ({
   table: {
-    fontFamily: theme.typography.fontFamily
+    fontFamily: theme.typography.fontFamily,
   },
   flexContainer: {
     display: "flex",
     alignItems: "center",
-    boxSizing: "border-box"
+    boxSizing: "border-box",
   },
   tableRow: {
-    cursor: "pointer"
+    cursor: "pointer",
   },
   tableRowHover: {
     "&:hover": {
-      backgroundColor: theme.palette.grey[200]
-    }
+      backgroundColor: theme.palette.grey[200],
+    },
   },
   tableCell: {
-    flex: 1
+    flex: 1,
   },
   noClick: {
     cursor: "initial",
     fontWeight: 900,
-    fontSize: "inherit"
-  }
+    fontSize: "inherit",
+  },
 });
 
 class MyTable extends React.PureComponent {
@@ -44,7 +44,7 @@ class MyTable extends React.PureComponent {
     const { classes, rowClassName, onRowClick } = this.props;
 
     return classNames(classes.tableRow, classes.flexContainer, rowClassName, {
-      [classes.tableRowHover]: index !== -1 && onRowClick != null
+      [classes.tableRowHover]: index !== -1 && onRowClick != null,
     });
   };
 
@@ -54,7 +54,7 @@ class MyTable extends React.PureComponent {
       <TableCell
         component="div"
         className={classNames(classes.tableCell, classes.flexContainer, {
-          [classes.noClick]: onRowClick == null
+          [classes.noClick]: onRowClick == null,
         })}
         variant="body"
         style={{ height: rowHeight }}
@@ -73,7 +73,7 @@ class MyTable extends React.PureComponent {
     const { headerHeight, columns, classes, sort } = this.props;
     const direction = {
       [SortDirection.ASC]: "asc",
-      [SortDirection.DESC]: "desc"
+      [SortDirection.DESC]: "desc",
     };
 
     const inner =
@@ -124,10 +124,10 @@ class MyTable extends React.PureComponent {
               ) => {
                 let renderer;
                 if (cellContentRenderer != null) {
-                  renderer = cellRendererProps =>
+                  renderer = (cellRendererProps) =>
                     this.cellRenderer({
                       cellData: cellContentRenderer(cellRendererProps),
-                      columnIndex: index
+                      columnIndex: index,
                     });
                 } else {
                   renderer = this.cellRenderer;
@@ -136,10 +136,10 @@ class MyTable extends React.PureComponent {
                 return (
                   <Column
                     key={dataKey}
-                    headerRenderer={headerProps =>
+                    headerRenderer={(headerProps) =>
                       this.headerRenderer({
                         ...headerProps,
-                        columnIndex: index
+                        columnIndex: index,
                       })
                     }
                     className={classNames(classes.flexContainer, className)}
@@ -163,51 +163,53 @@ MyTable.propTypes = {
     PropTypes.shape({
       cellContentRenderer: PropTypes.func,
       dataKey: PropTypes.string.isRequired,
-      width: PropTypes.number.isRequired
+      width: PropTypes.number.isRequired,
     })
   ).isRequired,
   headerHeight: PropTypes.number,
   onRowClick: PropTypes.func,
   rowClassName: PropTypes.string,
   rowHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
-  sort: PropTypes.func
+  sort: PropTypes.func,
 };
 
 MyTable.defaultProps = {
   headerHeight: 70,
-  rowHeight: 56
+  rowHeight: 56,
 };
 
 const CreateTable = withStyles(styles)(MyTable);
 
 class InvoiceTable extends React.PureComponent {
-  state ={
-    invoiceList:[],
-    open:false
-  }
-  componentDidMount(){
-    readCollection('invoices').onSnapshot(snap => {
-      const dataArray = snap.docs.map(x =>({...x.data(),id:x.id}));
+  state = {
+    invoiceList: [],
+    open: false,
+  };
+  componentDidMount() {
+    readCollection("invoices").onSnapshot((snap) => {
+      const dataArray = snap.docs.map((x) => ({ ...x.data(), id: x.id }));
       this.setState({
-        invoiceList:dataArray,
-        open:true
-      });  
+        invoiceList: dataArray,
+        open: true,
       });
+    });
   }
 
-  modifyInvoice = (e)=>{
-    const { history:{push}} = this.props;
-    push(`/edit-invoice/${e.rowData.id}`);
-  }
+  modifyInvoice = (e) => {
+    const {
+      history: { push },
+    } = this.props;
+    push(`/Invoice/edit-invoice/${e.rowData.id}`);
+  };
 
-  handleClose=(e)=>{
-    this.setState({open:false});
-  }
+  handleClose = (e) => {
+    this.setState({ open: false });
+  };
 
-  render(){
-    const { invoiceList,open } = this.state;
+  render() {
+    const { invoiceList, open } = this.state;
     return (
-      <Paper style={{ height: 600, width: "100%" }}elevation={0} >
+      <Paper style={{ height: 600, width: "100%" }} elevation={0}>
         <Navbar />
         <CreateTable
           rowCount={invoiceList.length}
@@ -218,13 +220,13 @@ class InvoiceTable extends React.PureComponent {
               width: 120,
               flexGrow: 0.85,
               label: "Customer Name",
-              dataKey: "customerName"
+              dataKey: "customerName",
             },
             {
               width: 120,
               label: "Phone",
               dataKey: "phone",
-              numeric: true
+              numeric: true,
             },
             {
               width: 120,
@@ -235,31 +237,31 @@ class InvoiceTable extends React.PureComponent {
               width: 120,
               label: "Invoice Amount",
               dataKey: "invoiceAmount",
-              numeric: true
+              numeric: true,
             },
             {
               width: 120,
               label: "Invoice Date",
               dataKey: "invoiceDate",
-              numeric: true
+              numeric: true,
             },
             {
               width: 120,
               label: "Invoice Status",
               dataKey: "invoiceStatus",
-              numeric: true
-            }
+              numeric: true,
+            },
           ]}
         />
-        <InfoDialog 
-          open={open} 
-          handleClose={this.handleClose} 
+        <InfoDialog
+          open={open}
+          handleClose={this.handleClose}
           title={"Edit/Delete ?"}
-          text={'Click on a row to edit/delete it ?'}
+          text={"Click on a row to edit/delete it ?"}
         />
       </Paper>
     );
-  }  
+  }
 }
 
 export default InvoiceTable;
